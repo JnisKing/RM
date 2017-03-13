@@ -1,0 +1,74 @@
+import java.util.*;
+
+public class Mid {
+	
+	static Map<Integer,Integer> hm  = new HashMap<Integer,Integer>();
+	
+	Scanner kb = new Scanner(System.in);
+	//input Min-Max
+	int max = Integer.MIN_VALUE;
+	int min = Integer.MAX_VALUE;
+	
+	//Frequency Min-Max
+	int maxFreq = Integer.MIN_VALUE;
+	int minFreq = Integer.MAX_VALUE;
+	
+	public static void main(String[] args) {
+		Mid m = new Mid();
+		m.getHM();
+		m.show();
+	}
+
+	//input key,value into HashMap
+	void getHM(){
+		while(1>0){
+			int x = kb.nextInt();
+			if(x<=0){
+				break;
+			}
+			if(hm.get(x) == null){
+				hm.put(x, 1);
+				if(x > max){
+					max = x;
+				}
+				if(x < min){
+					min = x;
+				}
+			}else{
+				int freq = hm.get(x);
+				hm.put(x, ++freq);
+				
+				if(freq > maxFreq){
+					maxFreq = freq;
+				}
+				if(freq < minFreq){
+					minFreq = freq;
+				}
+			}
+		}
+	}
+	
+	//show number not in key
+	/*void showNoFreq(){
+		for(int i = min ; i<max; ++i){
+			if(!number.contains(i)){
+				System.out.println(i + " ");
+			}
+		}
+	}*/
+	
+	//Print Key,Value in HashMap & Value Min-Max
+	void show(){
+		for(Map.Entry entry : hm.entrySet()){
+			System.out.println("Key : " + entry.getKey() + " Value : " + entry.getValue());
+		}
+		
+		//Min-Max of x
+		System.out.println("Max : " + max);
+		System.out.println("Min : " + min);
+		
+		//Min-Max of Frequency
+		System.out.println("MaxFreq : " + maxFreq);
+		System.out.println("MinFreq : " + --minFreq);
+	}
+}
